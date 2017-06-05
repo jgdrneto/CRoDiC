@@ -27,6 +27,7 @@ import com.delaroystudios.weatherapp.R;
 import com.delaroystudios.weatherapp.principal.eventos.Evento;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -82,8 +83,8 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
         @Override
         public void onClick(View v) {
             int adapterPosition = getAdapterPosition();
-            String weatherForDay = mWeatherData[adapterPosition];
-            //String weatherForDay = roteiro.get(adapterPosition).toString();
+            //String weatherForDay = mWeatherData[adapterPosition];
+            String weatherForDay = roteiro.get(adapterPosition).toString();
             mClickHandler.onClick(weatherForDay);
         }
     }
@@ -120,22 +121,39 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
      *                                  contents of the item at the given position in the data set.
      * @param position                  The position of the item within the adapter's data set.
      */
+    /*
     @Override
     public void onBindViewHolder(ForecastAdapterViewHolder forecastAdapterViewHolder, int position) {
         String weatherForThisDay = mWeatherData[position];
         forecastAdapterViewHolder.mWeatherTextView.setText(weatherForThisDay);
     }
+    */
+    public void onBindViewHolder(ForecastAdapterViewHolder forecastAdapterViewHolder, int position) {
+        String weatherForThisDay = roteiro.get(position).getNome() + "\n" +
+                "Hora: " + String.format("%02d",roteiro.get(position).getHorarioInicio().get(Calendar.HOUR_OF_DAY)) + ":" +
+                String.format("%02d",roteiro.get(position).getHorarioInicio().get(Calendar.MINUTE)) + " às " +
+                String.format("%02d",roteiro.get(position).getHorarioTermino().get(Calendar.HOUR_OF_DAY)) + ":" +
+                String.format("%02d",roteiro.get(position).getHorarioTermino().get(Calendar.MINUTE));
 
+        forecastAdapterViewHolder.mWeatherTextView.setText(weatherForThisDay);
+    }
     /**
      * This method simply returns the number of items to display. It is used behind the scenes
      * to help layout our Views and for animations.
      *
      * @return The number of items available in our forecast
      */
+    /*
     @Override
     public int getItemCount() {
         if (null == mWeatherData) return 0;
         return mWeatherData.length;
+    }
+    */
+
+    @Override
+    public int getItemCount() {
+        return roteiro.size();
     }
 
     /**
@@ -145,11 +163,12 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
      *
      * @param weatherData The new weather data to be displayed.
      */
+    /*
     public void setWeatherData(String[] weatherData) {
         mWeatherData = weatherData;
         notifyDataSetChanged();
     }
-
+    */
     /**
      * This method is used to set the weather forecast on a ForecastAdapter if we've already
      * created one. This is handy when we get new data from the web but don't want to create a
@@ -157,10 +176,10 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
      *
      * @param nRoteiro The new weather data to be displayed.
      */
-    /*
+
     public void setWeatherData(List<Evento> nRoteiro) {
         roteiro = nRoteiro;
         notifyDataSetChanged();
     }
-    */
+
 }
