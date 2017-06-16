@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1"
+    tools:ignore="UselessParent">
+
+    <TextView
+        android:id="@+id/textView_Classes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/classes"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/black"
+        android:textSize="36sp" />
+
+    <Spinner
+        android:id="@+id/spinner_Classes"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_weight="0.08"
+        android:spinnerMode="dialog"
+        tools:targetApi="honeycomb" />
+
+    <TextView
+        android:id="@+id/textView_HoraInicio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/horaInicio"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/black"
+        android:textSize="36sp" />
+
+    <Button
+        android:id="@+id/button_HoraInicio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="cliqueBotaoHoraInicio"
+        android:layout_weight="0.93"
+        android:text="@string/adicionarhora" />
+
+    <TextView
+        android:id="@+id/textView_HoraTermino"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/horaTermino"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/black"
+        android:textSize="36sp" />
+
+    <Button
+        android:id="@+id/button_HoraTermino"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="cliqueBotaoHoraTermino"
+        android:layout_weight="0.93"
+        android:text="@string/adicionarhora" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_CriarPreferencia"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.85"
+            android:text="@string/criarPreferencia" />
+
+        <Button
+            android:id="@+id/button_CancelarPreferencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancelarPreferencia" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_CriarRoteiro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.93"
+        android:text="@string/criarRoteiro" />
+
+</LinearLayout>
+
+</FrameLayout>

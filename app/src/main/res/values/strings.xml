@@ -172,7 +172,13 @@
 
     <string name="condition_unknown">Unknown (<xliff:g id="conditionId">%1$d</xliff:g>)</string>
 
-
+    <string name="classes">Classes</string>
+    <string name="horaInicio">Hora de inicío</string>
+    <string name="horaTermino">Hora de Término</string>
+    <string name="criarRoteiro">Criar roteiro</string>
+    <string name="cancelarPreferencia">Cancelar preferência</string>
+    <string name="criarPreferencia">Criar preferência</string>
+    <string name="adicionarhora">Adicionar horário</string>
     <!-- - - - - - - - - - - -->
     <!-- Used by NetworkUtils-->
     <!-- - - - - - - - - - - -->
@@ -187,4 +193,5 @@
     <!--Used by WeatherPreferences-->
     <!-- - - - - - - - - - - - - - -->
     <!--NONE-->
+
 </resources>
