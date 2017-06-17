@@ -26,10 +26,14 @@
     <Spinner
         android:id="@+id/spinner_Classes"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_weight="0.08"
+        android:layout_height="wrap_content"
         android:spinnerMode="dialog"
-        tools:targetApi="honeycomb" />
+        android:textColor="@android:color/black" />
+
+        <!--
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        -->
 
     <TextView
         android:id="@+id/textView_HoraInicio"
@@ -45,8 +49,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="cliqueBotaoHoraInicio"
-        android:layout_weight="0.93"
-        android:text="@string/adicionarhora" />
+        android:text="@string/adicionarhora"
+        android:textAlignment="center"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/textView_HoraTermino"
@@ -62,8 +67,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="cliqueBotaoHoraTermino"
-        android:layout_weight="0.93"
-        android:text="@string/adicionarhora" />
+        android:text="@string/adicionarhora"
+        android:textAlignment="center"
+        android:textSize="18sp" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -77,26 +83,30 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="1">
 
         <Button
             android:id="@+id/button_CriarPreferencia"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.85"
-            android:text="@string/criarPreferencia" />
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/criarPreferencia"
+            tools:ignore="ButtonStyle"
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/button_CancelarPreferencia"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cancelarPreferencia" />
+            android:layout_height="match_parent"
+            android:text="@string/cancelarPreferencia"
+            tools:ignore="ButtonStyle"
+            android:layout_weight="1"/>
     </LinearLayout>
 
     <Button
         android:id="@+id/button_CriarRoteiro"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="0.93"
         android:text="@string/criarRoteiro" />
 
