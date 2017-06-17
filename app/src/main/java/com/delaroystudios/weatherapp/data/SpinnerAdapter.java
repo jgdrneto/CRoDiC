@@ -39,6 +39,14 @@ public class SpinnerAdapter extends ArrayAdapter<Class<? extends Evento>> {
         return classes.get(position);
     }
 
+    public void setListClasses(List<Class<? extends Evento>> lClasses){
+        this.classes = lClasses;
+    }
+
+    public List<Class<? extends Evento>> getListClasses(){
+        return this.classes;
+    }
+
     public long getItemId(int position){
         return position;
     }

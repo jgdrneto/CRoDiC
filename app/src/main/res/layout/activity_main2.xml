@@ -76,8 +76,10 @@
         android:layout_height="150dp">
 
         <ListView
+            android:id="@+id/listView_listaPreferencias"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"/>
     </FrameLayout>
 
     <LinearLayout
@@ -91,6 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/criarPreferencia"
+            android:onClick="cliqueBotaoCriarPreferencia"
             tools:ignore="ButtonStyle"
             android:layout_weight="1" />
 
@@ -99,6 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/cancelarPreferencia"
+            android:onClick="cliqueBotaoCancelarPreferencia"
             tools:ignore="ButtonStyle"
             android:layout_weight="1"/>
     </LinearLayout>
@@ -108,6 +112,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.93"
+        android:onClick="cliqueBotaoCriarRoteiro"
         android:text="@string/criarRoteiro" />
 
 </LinearLayout>
