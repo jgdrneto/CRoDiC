@@ -39,6 +39,7 @@ import com.delaroystudios.weatherapp.data.WeatherPreferences;
 import com.delaroystudios.weatherapp.principal.ConstrutorDeRoteiro;
 import com.delaroystudios.weatherapp.principal.ESArquivosJSON;
 import com.delaroystudios.weatherapp.principal.Preferencia;
+import com.delaroystudios.weatherapp.principal.estrategias.EstrategiaAleatoria;
 import com.delaroystudios.weatherapp.principal.estrategias.EstrategiaComPreferencia;
 import com.delaroystudios.weatherapp.principal.estrategias.EstrategiaDeEscolha;
 import com.delaroystudios.weatherapp.principal.eventos.Alimentacao;
@@ -72,6 +73,11 @@ public class MainActivity extends AppCompatActivity implements
 
     private static final int FORECAST_LOADER_ID = 0;
 
+    //==========================================================================
+    List<Preferencia> lPref;
+    List<Class <? extends Evento>> lClasses;
+    EstrategiaDeEscolha estrategia;
+    //==========================================================================
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +85,9 @@ public class MainActivity extends AppCompatActivity implements
 
         //=====================================================
 
-        
+        lPref = (List<Preferencia>) getIntent().getSerializableExtra("listPreferencia");
+        lClasses = (List<Class<? extends Evento>>) getIntent().getSerializableExtra("listClasses");
+        estrategia = (EstrategiaDeEscolha) getIntent().getSerializableExtra("estrategia");
 
         //=====================================================
         /*
@@ -220,22 +228,6 @@ public class MainActivity extends AppCompatActivity implements
 
                     //=========================================================================
 
-                    //System.out.println("Passou aqui");
-
-                    List<Preferencia> preferencias = new ArrayList<Preferencia>();
-
-                    preferencias.add(new Preferencia(Alimentacao.class,12,0,14,0));
-                    //preferencias.add(new Preferencia(Descanso.class,RANKING.DOIS));
-                    //preferencias.add(new Preferencia(Exposicao.class,RANKING.DOIS));
-
-                    List<Class <? extends Evento>> classes = new ArrayList<Class <? extends Evento>>();
-                    classes.add(Alimentacao.class);
-                    classes.add(Descanso.class);
-                    classes.add(Exposicao.class);
-                    classes.add(Lazer.class);
-                    classes.add(Turismo.class);
-                    classes.add(Palestra.class);
-
                     ESArquivosJSON manipulador = new ESArquivosJSON();
 
                     Resources res = getResources();
@@ -244,38 +236,20 @@ public class MainActivity extends AppCompatActivity implements
 
                     List<Evento> le = manipulador.leitorJSONArray(am.open("teste.json"));
 
-                    ConstrutorDeRoteiro construtor = new ConstrutorDeRoteiro(le, classes, preferencias, 2017, Calendar.MARCH, 10,7);
+                    System.out.println(lClasses.toString());
+                    System.out.println(lPref.toString());
+                    System.out.println(estrategia.getClass().getSimpleName());
+
+                    ConstrutorDeRoteiro construtor = new ConstrutorDeRoteiro(le, lClasses, lPref, 2017, Calendar.MARCH, 10,7);
 
                     //EstrategiaDeEscolha estrategia = new EstrategiaAleatoria();
                     //EstrategiaDeEscolha estrategia = new EstrategiaPorMenorPreco();
-                    EstrategiaDeEscolha estrategia = new EstrategiaComPreferencia();
+                    //EstrategiaDeEscolha estrategia = new EstrategiaComPreferencia();
 
                     return construtor.getRoteiro(estrategia);
 
                     //=========================================================================
 
-
-                    //lOCAL ONDE SE PEGA OS VALORES PARA SEREM PREENCHIDDOS NA LISTA
-                    /*
-                    String[] simpleJsonWeatherData = OpenWeatherJsonUtils
-                            .getSimpleWeatherStringsFromJson(MainActivity.this, jsonWeatherResponse);
-
-                    return simpleJsonWeatherData;
-                    */
-                    /*
-                    String[] eventos = new String[roteiro.size()];
-
-                    for(int i=0;i<roteiro.size();i++){
-                        eventos[i] = roteiro.get(i).getNome() + "\n" +
-                        "Hora: " + String.format("%02d",roteiro.get(i).getHorarioInicio().get(Calendar.HOUR_OF_DAY)) + ":" +
-                        String.format("%02d",roteiro.get(i).getHorarioInicio().get(Calendar.MINUTE)) + " às " +
-                        String.format("%02d",roteiro.get(i).getHorarioTermino().get(Calendar.HOUR_OF_DAY)) + ":" +
-                        String.format("%02d",roteiro.get(i).getHorarioTermino().get(Calendar.MINUTE));
-
-                    }
-
-                    return eventos;
-                    */
                 } catch (Exception e) {
                     e.printStackTrace();
                     return null;

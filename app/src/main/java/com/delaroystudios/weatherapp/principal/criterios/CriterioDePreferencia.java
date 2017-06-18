@@ -23,8 +23,8 @@ public class CriterioDePreferencia extends Criterio{
 				for(Preferencia pf : preferencias){
 					for(Evento ev : eventos){
 						
-						if(pf.getInicio().get(Calendar.HOUR_OF_DAY)<ev.getHorarioInicio().get(Calendar.HOUR_OF_DAY) ||
-						   pf.getInicio().get(Calendar.HOUR_OF_DAY)==ev.getHorarioInicio().get(Calendar.HOUR_OF_DAY) && pf.getInicio().get(Calendar.MINUTE)<=ev.getHorarioInicio().get(Calendar.MINUTE)){
+						if((pf.getInicio().get(Calendar.HOUR_OF_DAY)< ev.getHorarioInicio().get(Calendar.HOUR_OF_DAY)) ||
+						   (pf.getInicio().get(Calendar.HOUR_OF_DAY)== ev.getHorarioInicio().get(Calendar.HOUR_OF_DAY) && pf.getInicio().get(Calendar.MINUTE)<=ev.getHorarioInicio().get(Calendar.MINUTE))){
 							le.add(ev);
 						}
 					}

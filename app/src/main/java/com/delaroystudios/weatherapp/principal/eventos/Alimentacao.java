@@ -34,7 +34,7 @@ public class Alimentacao extends Evento{
 
 	@Override
 	public String toString() {
-		return super.toString() + "Qualidade: " + this.getQualidade().name()+"\n";
+		return super.toString() + "Qualidade: " + this.qualidade.name()+"\n";
 	}	
 	
 }

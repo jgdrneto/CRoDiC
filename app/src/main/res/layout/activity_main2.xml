@@ -73,13 +73,12 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp">
+        android:layout_height="110dp">
 
         <ListView
             android:id="@+id/listView_listaPreferencias"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"/>
+            android:layout_height="match_parent" />
     </FrameLayout>
 
     <LinearLayout
@@ -106,6 +105,13 @@
             tools:ignore="ButtonStyle"
             android:layout_weight="1"/>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button_EscolherEstrategia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="cliqueBotaoEscolherEstrategia"
+        android:text="@string/escolherEstrategia" />
 
     <Button
         android:id="@+id/button_CriarRoteiro"

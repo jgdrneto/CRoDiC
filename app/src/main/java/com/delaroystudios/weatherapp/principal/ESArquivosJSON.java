@@ -1,7 +1,5 @@
 package com.delaroystudios.weatherapp.principal;
 
-import android.content.res.Resources;
-
 import com.delaroystudios.weatherapp.principal.eventos.Alimentacao;
 import com.delaroystudios.weatherapp.principal.eventos.Descanso;
 import com.delaroystudios.weatherapp.principal.eventos.Evento;
@@ -11,7 +9,6 @@ import com.delaroystudios.weatherapp.principal.eventos.Lazer;
 import com.delaroystudios.weatherapp.principal.eventos.Palestra;
 import com.delaroystudios.weatherapp.principal.eventos.Turismo;
 
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -82,13 +79,16 @@ public class ESArquivosJSON {
 								 qD);
 				
 			case "Exposicao" :
+
+				valores = Exposicao.obterValoresExpApartirDoJSON(obj);
+
 				return new Exposicao((String)valores.get(Evento.NOME),
 						 (String)valores.get(Evento.DESCRICAO),
 						 (String)valores.get(Evento.LOCAL),
 						 (double)valores.get(Evento.PRECO),
 						 (GregorianCalendar)valores.get(Evento.HORADEINICIO),
 						 (GregorianCalendar)valores.get(Evento.HORADETERMINO),
-						 (String)valores.get("Autor"));
+						 (String)(valores.get("Autor")));
 			case "Intervalo" :
 				return new Intervalo((String)valores.get(Evento.NOME),
 						 (String)valores.get(Evento.DESCRICAO),
@@ -104,13 +104,16 @@ public class ESArquivosJSON {
 						 (GregorianCalendar)valores.get(Evento.HORADEINICIO),
 						 (GregorianCalendar)valores.get(Evento.HORADETERMINO));
 			case "Palestra" :
+
+				valores = Palestra.obterValoresPalApartirDoJSON(obj);
+
 				return new Palestra((String)valores.get(Evento.NOME),
 						 (String)valores.get(Evento.DESCRICAO),
 						 (String)valores.get(Evento.LOCAL),
 						 (double)valores.get(Evento.PRECO),
 						 (GregorianCalendar)valores.get(Evento.HORADEINICIO),
 						 (GregorianCalendar)valores.get(Evento.HORADETERMINO),
-						 (String)valores.get("Palestrante"));
+						 (String)(valores.get("Palestrante")));
 			case "Turismo" :
 				return new Turismo((String)valores.get(Evento.NOME),
 						 (String)valores.get(Evento.DESCRICAO),

@@ -5,9 +5,10 @@ import com.delaroystudios.weatherapp.principal.criterios.Criterio;
 import com.delaroystudios.weatherapp.principal.criterios.CriterioMenorPreco;
 import com.delaroystudios.weatherapp.principal.eventos.Evento;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class EstrategiaPorMenorPreco implements EstrategiaDeEscolha{
+public class EstrategiaPorMenorPreco implements EstrategiaDeEscolha,Serializable {
 
 	@Override
 	public Evento escolher(List<Evento> eventos, List<Preferencia> preferencias) {
@@ -22,6 +23,11 @@ public class EstrategiaPorMenorPreco implements EstrategiaDeEscolha{
 		}else{
 			return null;
 		}
+	}
+
+	@Override
+	public String toString(){
+		return "Estratégia de menor preço";
 	}
 
 }

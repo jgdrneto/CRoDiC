@@ -1,9 +1,13 @@
 package com.delaroystudios.weatherapp;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,6 +19,11 @@ import com.delaroystudios.weatherapp.data.SpinnerAdapter;
 import com.delaroystudios.weatherapp.data.SpinnerOnItemSelectedListener;
 import com.delaroystudios.weatherapp.data.TimePickerFragment;
 import com.delaroystudios.weatherapp.principal.Preferencia;
+import com.delaroystudios.weatherapp.principal.estrategias.EstrategiaAleatoria;
+import com.delaroystudios.weatherapp.principal.estrategias.EstrategiaComPreferencia;
+import com.delaroystudios.weatherapp.principal.estrategias.EstrategiaComPreferenciaMenorPreco;
+import com.delaroystudios.weatherapp.principal.estrategias.EstrategiaDeEscolha;
+import com.delaroystudios.weatherapp.principal.estrategias.EstrategiaPorMenorPreco;
 import com.delaroystudios.weatherapp.principal.eventos.Alimentacao;
 import com.delaroystudios.weatherapp.principal.eventos.Descanso;
 import com.delaroystudios.weatherapp.principal.eventos.Evento;
@@ -30,13 +39,15 @@ import java.util.List;
 
 public class Main2Activity extends AppCompatActivity {
 
-    private Button btnIniTimePicker,btnTerTimePicker;
+    private Button btnIniTimePicker,btnTerTimePicker,btnEscEstrategia;
     private Spinner spinnerClasses;
     private ListView listaPreferencia;
     private SpinnerAdapter spinnerAdapter;
     private ArrayAdapter<Preferencia> listViewAdapter;
     private List<Class <? extends Evento>> classes;
     private List<Preferencia> preferencias;
+    private List<EstrategiaDeEscolha> estrategias;
+    private EstrategiaDeEscolha estrategia;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +55,7 @@ public class Main2Activity extends AppCompatActivity {
 
         btnIniTimePicker =  (Button)findViewById(R.id.button_HoraInicio);
         btnTerTimePicker =  (Button)findViewById(R.id.button_HoraTermino);
-
+        btnEscEstrategia =  (Button)findViewById(R.id.button_EscolherEstrategia);
         //==========================================================================
 
         preferencias  = new ArrayList<Preferencia>();
@@ -74,6 +85,15 @@ public class Main2Activity extends AppCompatActivity {
         spinnerClasses.setOnItemSelectedListener(new SpinnerOnItemSelectedListener(this,spinnerAdapter));
 
         //==========================================================================
+
+        estrategias = new ArrayList<EstrategiaDeEscolha>();
+
+        estrategias.add(new EstrategiaAleatoria());
+        estrategias.add(new EstrategiaComPreferencia());
+        estrategias.add(new EstrategiaComPreferenciaMenorPreco());
+        estrategias.add(new EstrategiaPorMenorPreco());
+
+        //==========================================================================
     }
 
     private Date converterTextParaTimer(String tempo){
@@ -94,12 +114,43 @@ public class Main2Activity extends AppCompatActivity {
         }
     }
 
+    public void cliqueBotaoEscolherEstrategia(View View){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        final ArrayAdapter<EstrategiaDeEscolha> arrayAdapter = new ArrayAdapter<EstrategiaDeEscolha>(this, android.R.layout.simple_selectable_list_item);
+
+        for(EstrategiaDeEscolha e : estrategias){
+            arrayAdapter.add(e);
+        }
+
+        builder.setTitle("Escolha a estratégia");
+        builder.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+                   public void onClick(DialogInterface dialog, int which) {
+                       estrategia = estrategias.get(which);
+                       btnEscEstrategia.setText(estrategia.toString());
+                       dialog.dismiss();
+                   }
+        });
+
+        builder.create();
+        AlertDialog alerta = builder.create();
+        alerta.show();
+    }
+
     public void cliqueBotaoCriarRoteiro(View View){
-        Context context = this;
-        Class destinationClass = MainActivity.class;
-        Intent intentToStartDetailActivity = new Intent(context, destinationClass);
-        intentToStartDetailActivity.putExtra("Preferencias", (Serializable) preferencias);
-        startActivity(intentToStartDetailActivity);
+
+        if(estrategia!=null){
+            Context context = this;
+            Class destinationClass = MainActivity.class;
+            Intent intentToStartDetailActivity = new Intent(context, destinationClass);
+            intentToStartDetailActivity.putExtra("listPreferencia", (Serializable) preferencias);
+            intentToStartDetailActivity.putExtra("listClasses", (Serializable) classes);
+            intentToStartDetailActivity.putExtra("estrategia", estrategia);
+            startActivity(intentToStartDetailActivity);
+        }else{
+            Toast.makeText(this, "Escolha a estratégia", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void cliqueBotaoCancelarPreferencia(View View){

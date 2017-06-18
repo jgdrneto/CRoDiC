@@ -109,7 +109,7 @@ public abstract class Evento {
 	public void setHorarioTermino(GregorianCalendar horarioTermino) {
 		this.horarioTermino = horarioTermino;
 	}
-	
+
 	@Override
 	public String toString() {
 		

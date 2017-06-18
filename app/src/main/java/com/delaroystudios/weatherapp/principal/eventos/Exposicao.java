@@ -2,16 +2,17 @@ package com.delaroystudios.weatherapp.principal.eventos;
 
 
 import java.util.GregorianCalendar;
+import java.util.Map;
 
 import org.json.simple.JSONObject;
 
 public class Exposicao extends Evento{
 	
-	private String autor;
+	public String autor;
 
-	public Exposicao(String nome, String descricao, String local, double preco, GregorianCalendar horarioInicio, GregorianCalendar horarioTermino, String autor) {
+	public Exposicao(String nome, String descricao, String local, double preco, GregorianCalendar horarioInicio, GregorianCalendar horarioTermino, String nAutor) {
 		super(nome,Exposicao.class.getSimpleName(), descricao, local, preco, horarioInicio, horarioTermino);
-		this.autor = autor;
+		this.autor = nAutor;
 	}
 
 	public String getAutor() {
@@ -30,10 +31,16 @@ public class Exposicao extends Evento{
 		
 		return json;
 	}
-	
+
+	public static Map<String,Object> obterValoresExpApartirDoJSON(JSONObject obj){
+		Map<String,Object> valores = Evento.obterValoresApartirDoJSON(obj);
+		valores.put("Autor",obj.get("Autor"));
+		return valores;
+	}
+
 	@Override
 	public String toString() {
-		return super.toString() + "Autor: " + this.getAutor()+"\n";
+		return (super.toString() + "Autor: " + this.autor);
 	}	
 	
 }

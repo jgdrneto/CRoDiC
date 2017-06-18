@@ -1,6 +1,7 @@
 package com.delaroystudios.weatherapp.principal.eventos;
 
 import java.util.GregorianCalendar;
+import java.util.Map;
 
 import org.json.simple.JSONObject;
 
@@ -29,9 +30,15 @@ public class Palestra extends Evento{
 		
 		return json;
 	}
-	
+
+	public static Map<String,Object> obterValoresPalApartirDoJSON(JSONObject obj){
+		Map<String,Object> valores = Evento.obterValoresApartirDoJSON(obj);
+		valores.put("Palestrante",obj.get("Palestrante"));
+		return valores;
+	}
+
 	@Override
 	public String toString() {
-		return super.toString() + "Palestrante: " + this.getPalestrante()+"\n";
+		return super.toString() + "Palestrante: " + this.palestrante+"\n";
 	}	
 }
