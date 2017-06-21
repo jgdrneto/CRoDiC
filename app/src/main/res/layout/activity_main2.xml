@@ -18,7 +18,7 @@
         android:id="@+id/textView_Classes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/classes"
+        android:text="@string/eventos"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@android:color/black"
         android:textSize="36sp" />

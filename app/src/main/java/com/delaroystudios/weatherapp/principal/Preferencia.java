@@ -66,7 +66,7 @@ public class Preferencia implements Comparable<Preferencia>,Serializable{
 
 	@Override
 	public String toString() {
-		return "Classe: " + classe.getSimpleName() + " "+ "Inicio: "+ converterCalendarParaStringTempo(inicio) + " Fim: " + converterCalendarParaStringTempo(fim);
+		return "Evento: " + classe.getSimpleName() + " "+ "Inicio: "+ converterCalendarParaStringTempo(inicio) + " Fim: " + converterCalendarParaStringTempo(fim);
 	}
 
 	@Override

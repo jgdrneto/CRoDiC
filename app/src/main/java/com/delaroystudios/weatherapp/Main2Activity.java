@@ -71,10 +71,14 @@ public class Main2Activity extends AppCompatActivity {
         spinnerClasses   =  (Spinner)findViewById(R.id.spinner_Classes);
 
         classes = new ArrayList<Class <? extends Evento>>();
+
+        //CRoDic Lite
         classes.add(Alimentacao.class);
         classes.add(Descanso.class);
+        //CRoDiC Pro
         classes.add(Exposicao.class);
         classes.add(Lazer.class);
+        //CRoDic Plus
         classes.add(Turismo.class);
         classes.add(Palestra.class);
 
@@ -87,18 +91,20 @@ public class Main2Activity extends AppCompatActivity {
         //==========================================================================
 
         estrategias = new ArrayList<EstrategiaDeEscolha>();
-
+        //CRoDic Lite
         estrategias.add(new EstrategiaAleatoria());
+        //CRoDic Pro
         estrategias.add(new EstrategiaComPreferencia());
-        estrategias.add(new EstrategiaComPreferenciaMenorPreco());
         estrategias.add(new EstrategiaPorMenorPreco());
+        //CRoDic Plus
+        estrategias.add(new EstrategiaComPreferenciaMenorPreco());
 
         //==========================================================================
     }
 
     private Date converterTextParaTimer(String tempo){
 
-        if(tempo.equals("Hora de inicío") || tempo.equals("Hora de término") ) {
+        if(tempo.equals("Adicionar horário")) {
             return null;
         }else {
             int hora = Integer.parseInt(tempo.substring(0, tempo.indexOf(":")));
@@ -172,19 +178,19 @@ public class Main2Activity extends AppCompatActivity {
         //Toast.makeText(this, horaInicio.getHours()+":"+horaInicio.getMinutes()+ "\n" + horaTermino.getHours() + ":" +horaTermino.getMinutes(), Toast.LENGTH_LONG).show();
 
         if(horaInicio==null || horaTermino==null){
-            Toast.makeText(this, "Escolha hora de ínicio e hora de término", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Escolha hora de ínicio e hora de término", Toast.LENGTH_SHORT).show();
         }else{
             if(horaInicio.after(horaTermino)){
-                Toast.makeText(this, "Hora de inicio posterior a hora de término", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Hora de inicio posterior a hora de término", Toast.LENGTH_SHORT).show();
 
-                btnIniTimePicker.setText("Hora de inicío");
-                btnTerTimePicker.setText("Hora de término");
+                btnIniTimePicker.setText("Adicionar horário");
+                btnTerTimePicker.setText("Adicionar horário");
             }else {
 
                 Class<? extends Evento> c = (Class<? extends Evento>) spinnerClasses.getSelectedItem();
 
                 if (c == null) {
-                    Toast.makeText(this, "Selecione uma classe", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Selecione um tipo de evento", Toast.LENGTH_SHORT).show();
                 } else {
                     //Remove valor do spinner
                     spinnerAdapter.getListClasses().remove(spinnerClasses.getSelectedItem());
